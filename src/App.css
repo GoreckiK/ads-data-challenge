@@ -28,6 +28,64 @@
   color: #61dafb;
 }
 
+.legend {
+  width: 100wv;
+  border: 1px solid #808080;
+  padding: 1em;
+  text-align: left;
+  margin: 1em;
+}
+
+.filters {
+  width: 30wv;
+  background-color: #61dafb;
+  padding: 1em;
+  margin: 1em;
+}
+
+.chart {
+  
+}
+
+.chip {
+  display: flex;
+  background-color: white;
+  height: 20px;
+}
+
+.chart-container {
+  display: flex;
+}
+
+.dropdown {
+  position: relative;
+  background-color: #808080;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.dropdown-list {
+  width: 100%;
+  position: absolute;
+  top: 48px;
+  background-color: white;
+  padding: 10px;
+  overflow-y: scroll;
+  max-height: 200px;
+  margin: unset;
+  z-index: 1;
+}
+
+.dropdown-item {
+  height: 30px;
+  font-size: small;
+  text-align: left;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
