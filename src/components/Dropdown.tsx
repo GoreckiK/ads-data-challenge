@@ -1,3 +1,5 @@
+import { idGenerator } from "../helpers/common";
+
 interface IDropdownProps {
 	onItemClick: (item: string) => void;
 	onClose: () => void;
@@ -12,15 +14,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
 	children,
 	onClose,
 }) => {
-
-    function* idGenerator() {
-        let id = 1;
-        while (true) {
-            yield id ++;
-        }
-    }
-
-    const generator = idGenerator();
+    const id = idGenerator();
 
 	return (
 		<div className="dropdown" onClick={onClose}>
@@ -32,7 +26,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
 							<li
 								className="dropdown-item"
 								onClick={() => onItemClick(item)}
-								key={item + generator.next()}
+								key={item + id.next().value}
 							>
 								{item}
 							</li>

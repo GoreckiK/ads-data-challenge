@@ -4,7 +4,6 @@ import {
 	Legend,
 	Line,
 	LineChart,
-	Tooltip,
 	XAxis,
 	YAxis,
 } from "recharts";
@@ -63,7 +62,6 @@ const Chart: React.FC<IChartProps> = ({ data }) => {
 					angle={90}
 				/>
 			</YAxis>
-			<Tooltip />
 			<Legend />
 			<Line
 				yAxisId="left"
