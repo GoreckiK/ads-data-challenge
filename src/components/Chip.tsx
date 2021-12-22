@@ -9,8 +9,8 @@ interface IChip {
 const Chip:React.FC<IChip> = ({name, onClose}) => {
     return (
         <div className="chip">
-            <CloseIcon onClick={() => onClose(name)}/>
-            <p>{name}</p>
+            <CloseIcon onClick={() => onClose(name)} style={{height: "12px", marginLeft: "8px"}}/>
+            <p className="chip-label">{name}</p>
         </div>
     )
 }

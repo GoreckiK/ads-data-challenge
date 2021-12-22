@@ -43,32 +43,45 @@
   margin: 1em;
 }
 
-.chart {
-  
-}
-
 .chip {
   display: flex;
   background-color: white;
   height: 20px;
+  align-items: center;
+}
+
+.chip-label {
+  margin: unset;
+  padding: 0 8px;
 }
 
 .chart-container {
   display: flex;
 }
 
-.dropdown {
+.dropdown-wrapper {
   position: relative;
+}
+
+.dropdown {
   background-color: #808080;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: baseline;
   padding: 10px;
+  height: 24px;
+  overflow-y: scroll;
+}
+
+.dropdown::-webkit-scrollbar {
+  display: none;   
 }
 
 .dropdown-list {
   width: 100%;
   position: absolute;
   top: 48px;
+  left: 0;
   background-color: white;
   padding: 10px;
   overflow-y: scroll;

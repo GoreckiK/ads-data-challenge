@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { useConvertCSVtoJSON } from "./hooks/common";
 import Legend from "./components/Legend";
 import Filters from "./components/Filters";
-import Chart from "./components/Chart";
-import { ConvertedToJson } from "./types/AdTypes";
+import ChartComponent from "./components/Chart";
+import { ConvertedToJson } from "./types/Adverts";
 
 function App() {
 	const { convertedData } = useConvertCSVtoJSON(
@@ -61,7 +61,7 @@ function App() {
 					dataSources={dataSources}
 					setDataSources={setDataSourcesFilters}
 				/>
-				<Chart data={convData} />
+				<ChartComponent data={convData} />
 			</div>
 		</div>
 	);

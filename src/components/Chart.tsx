@@ -1,83 +1,81 @@
-import {
-	CartesianGrid,
-	Label,
-	Legend,
-	Line,
-	LineChart,
-	XAxis,
-	YAxis,
-} from "recharts";
-import { ConvertedToJson } from "../types/AdTypes";
+import { Chart } from "react-chartjs-2";
+import { ConvertedToJson } from "../types/Adverts";
 import { kFormatter } from "../helpers/formatters";
+import { Chart as Chart2, registerables } from "chart.js";
+Chart2.register(...registerables);
 
 interface IChartProps {
 	data: ConvertedToJson[];
 }
 
-const Chart: React.FC<IChartProps> = ({ data }) => {
-	const lessData = data.filter((entry, index) => index % 31 === 0);
-	console.log(lessData);
+const ChartComponent: React.FC<IChartProps> = ({ data }) => {
+	const preparedData = {
+		labels: data.map((record) => record.Date),
+		datasets: [
+			{
+				data: data.map((record) => record.Clicks),
+				borderColor: "rgb(75, 192, 192)",
+				label: "Clicks",
+				yAxisID: "y",
+				tension: 0.1,
+				fill: false,
+			},
+			{
+				data: data.map((record) => record.Impressions),
+				borderColor: "rgb(175, 192, 292)",
+				yAxisID: "y1",
+				label: "Impressions",
+				tension: 0.1,
+				fill: false,
+			},
+		],
+	};
 
 	return (
-		<LineChart
-			width={1200}
-			height={600}
-			data={lessData.map((record) => {
-				return {
-					...record,
-					Clicks: parseInt(record.Clicks),
-					Impressions: parseInt(record.Impressions),
-				};
-			})}
-			margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-		>
-			<CartesianGrid strokeDashoffset={30} />
-			<XAxis
-				dataKey="Date"
-				allowDataOverflow={false}
-				type="category"
-				minTickGap={120}
-			></XAxis>
-			<YAxis yAxisId="left" dataKey="Clicks" >
-				<Label
-					value="Clicks"
-					position="insideLeft"
-					offset={0}
-					angle={-90}
-				/>
-			</YAxis>
-			<YAxis
-				yAxisId="right"
-				orientation="right"
-				dataKey="Impressions"
-				tickFormatter={(value) => {
-					return kFormatter(value);
+		<div>
+			<Chart
+				width={1000}
+				height={800}
+				type="line"
+				data={preparedData}
+				options={{
+					responsive: true,
+					interaction: {
+						mode: "index",
+						intersect: false,
+					},
+					scales: {
+						x: {
+							ticks: {
+								autoSkip: true,
+								autoSkipPadding: 100,
+							},
+						},
+						y: {
+							type: "linear",
+							display: true,
+							position: "left",
+						},
+						y1: {
+							type: "linear",
+							display: true,
+							position: "right",
+							ticks: {
+								callback: (value) => {
+									return kFormatter(value);
+								},
+							},
+
+							// grid line settings
+							grid: {
+								drawOnChartArea: false, // only want the grid lines for one axis to show up
+							},
+						},
+					},
 				}}
-                tickCount={6}
-			>
-				<Label
-					value="Impressions"
-					position="insideRight"
-					offset={0}
-					angle={90}
-				/>
-			</YAxis>
-			<Legend />
-			<Line
-				yAxisId="left"
-				type="monotone"
-				dataKey="Clicks"
-				stroke="#8884d8"
-				activeDot={{ r: 18 }}
-			/>
-			<Line
-				yAxisId="right"
-				type="monotone"
-				dataKey="Impressions"
-				stroke="#82ca9d"
-			/>
-		</LineChart>
+			></Chart>
+		</div>
 	);
 };
 
-export default Chart;
+export default ChartComponent;

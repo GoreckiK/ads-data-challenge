@@ -1,4 +1,4 @@
-import { ConvertedToJson } from './../types/AdTypes';
+import { ConvertedToJson } from '../types/Adverts';
 import { useEffect, useState } from "react";
 
 const useConvertCSVtoJSON = (url: string) => {
